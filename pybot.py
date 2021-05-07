@@ -4,7 +4,7 @@ command_file.close()
 lines = raw_data.splitlines()
 
 bot_dict = {}
-for lune in lines:
+for line in lines:
     word_list = line.split(',')
     key = word_list[0]
     response = word_list[1]
@@ -17,6 +17,14 @@ while True:
         if key in command:
             response = bot_dict[key]
             break
+    if '平成' in command:
+        heisei, year_str = command.split()
+        year = int(year_str)
+        if year >= 1989:
+            heisei_year = year - 1988
+            response = '西暦{}年ハ、平成{}年デス'.format(year, heisei_year)
+        else:
+            response = '西暦{}年ハ、平成デハアリマセン'.format(year)
 
     if not response:
         response = "ナニヲイッテイルノカワカリマセン"
